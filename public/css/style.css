@@ -4,6 +4,65 @@ body {
     align-items: center;
 }
 
+.post-photo {
+    position: absolute;
+    margin-top: 98px;
+    margin-left: -60px;
+}
+
+hr {
+    color: rgba(0, 0, 0, 0.15);
+    margin-top: 190px;
+}
+
+div p {
+    max-height: 110px;
+    margin-top: 15px;
+    overflow: auto;
+}
+
+.post-name {
+    position: absolute;
+    font-size: 24px;
+    margin-top: -44px;
+    margin-left: 75px;
+}
+
+.profile-image {
+    height: 60px;
+    width: 60px;
+    border-radius: 60px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.new-post {
+    height: 100px;
+}
+
+.post {
+    background-color: whitesmoke;
+    margin-top: 13px;
+    width: 700px;
+    height: 400px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;    
+}
+
+.post-photo {
+    max-width: 250px;
+    max-height: 150px;
+}
+
+.feed {
+    margin-top: 1rem;
+    display: grid;
+    overflow: auto;
+    align-items: top;
+    justify-content: center;
+    position: relative;
+}
+
 .main {
     display: flex;
     background: #0052D4;

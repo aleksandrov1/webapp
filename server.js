@@ -19,6 +19,7 @@ initializePassport(
 )
 
 const users = []
+const posts = []
 
 app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
@@ -39,7 +40,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.get('/', checkAuthenticated, (req, res) => {
-    res.render('index.ejs', { name: req.user.name })
+    res.render('index.ejs', { name: req.user.name, currentPosts: posts, postName: posts.name })
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) =>  {
@@ -48,6 +49,10 @@ app.get('/login', checkNotAuthenticated, (req, res) =>  {
 
 app.get('/register', checkNotAuthenticated, (req, res) =>  {
     res.render('register.ejs')
+})
+
+app.get('/newpost', checkAuthenticated, (req, res) =>  {
+    res.render('newpost.ejs')
 })
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
@@ -70,6 +75,21 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
         res.redirect('/register')
     }
     console.log(users)
+})
+
+app.post('/newpost', checkAuthenticated, (req, res) => {
+    try {
+    posts.push({
+        post_id: Date.now().toString(),
+        heading: req.body.heading,
+        description: req.body.description,
+        photo: req.body.photo
+    })
+    } catch {
+        res.redirect('/login')
+    }
+    console.log(posts)
+    res.redirect('/')
 })
 
 app.delete('/logout', (req, res) => {

@@ -5,12 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.css">
     <title>Startup App</title>
 </head>
 <body>
     <div class="main">
         <div class="feed">
+            <% currentPosts.forEach(function(item){ %>
+                <div class="post">
+                <img src="https://tanzolymp.com/images/default-non-user-no-photo-1.jpg" alt="" class="profile-image">
+                <h1 class="post-name"> <%= item.heading %> </h1>
+                <img src="<%= item.photo %>" class="post-photo" alt="">
+                <hr>
+                <p class="post-desc"> <%= item.description %> </p>
+                </div>
+            <% }) %>
+        </div>
             <button class="logged-in"><%= name %></button>
+            <button onclick="location.href='/newpost'" class="new-post">Create a Post</button>
             <form action="/logout?_method=DELETE" method="POST">
             <button type="Submit">Logout</button>
         </div>
