@@ -79,17 +79,6 @@ div p {
     margin-left: 900px;
 }
 
-.logged-in {
-    background-color: blanchedalmond;
-    width: 100px;
-    height: 30px;
-    border-radius: 10px;
-    text-align: center;
-    top: 10px;
-    right: 10px;
-    position: absolute;
-}
-
 .feed {
     width: 1500px;
     height: 800px;
@@ -99,4 +88,60 @@ div p {
     margin-left: 8px;
 }
 
+.pfp {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/*Dropdown*/
+/* Dropdown Button */
+.dropbtn {
+    border-radius: 15px;
+    background-color: #ffffff;
+    color: black;
+    font-size: 16px;
+    border: none;
+    width: 160px;
+    height: 70px;
+    padding: 15px 40px; 
+    position: relative;
+    text-align: center;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color: #ddd;}
 

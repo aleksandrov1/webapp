@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/profile.css">
+    <title>My Profile</title>
+</head>
+<body>
+    <div class="profile-container">
+        <h1>My Profile</h1>
+    <img class="pfp" src="<%= pfp %>" alt="">
+    <p>Profile ID : <%= id %></p>
+    <form action="/profile" method="POST">
+        <input type="changePicture" id="changePicture" name="changePicture" type="changePicture" required placeholder="New Profile Picture URL">
+        <button type="submit">Change Profile Picture</button>
+    </form>
+    </div>
+</body>
+</html>

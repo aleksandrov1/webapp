@@ -40,12 +40,17 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.get('/', checkAuthenticated, (req, res) => {
-    res.render('index.ejs', { name: req.user.name, currentPosts: posts, postName: posts.name })
+    res.render('index.ejs', { name: req.user.name, currentPosts: posts, postName: posts.name, pfp: req.user.profile_photo })
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) =>  {
     res.render('login.ejs')
 })
+
+app.get('/profile', checkAuthenticated, (req, res) =>  {
+    res.render('profile.ejs', { id: req.user.id, name: req.user.name, pfp: req.user.profile_photo })
+})
+
 
 app.get('/register', checkNotAuthenticated, (req, res) =>  {
     res.render('register.ejs')
@@ -68,7 +73,8 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
             id: Date.now().toString(),
             name: req.body.name,
             email: req.body.email,
-            password: hashedPassword
+            password: hashedPassword,
+            profile_photo: 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg'
         })
         res.redirect('/login')
     } catch {
@@ -78,18 +84,36 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 })
 
 app.post('/newpost', checkAuthenticated, (req, res) => {
+    var resultObject = users.findIndex((obj => obj.name == req.user.name));
+    var resultPicture = users[resultObject].profile_photo
     try {
     posts.push({
         post_id: Date.now().toString(),
         heading: req.body.heading,
         description: req.body.description,
-        photo: req.body.photo
+        photo: req.body.photo,
+        pfp: resultPicture
     })
     } catch {
         res.redirect('/login')
     }
     console.log(posts)
     res.redirect('/')
+})
+
+function search(nameKey, myArray){
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].name === nameKey) {
+            return myArray[i];
+        }
+    }
+}
+
+app.post('/profile', checkAuthenticated, (req, res, next) => {
+    var user = req.user.name;
+    var resultObject = users.findIndex((obj => obj.name == req.user.name));
+    users[resultObject].profile_photo = req.body.changePicture
+    res.redirect('/profile')
 })
 
 app.delete('/logout', (req, res) => {

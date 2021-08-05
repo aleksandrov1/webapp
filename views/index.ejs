@@ -13,15 +13,21 @@
         <div class="feed">
             <% currentPosts.forEach(function(item){ %>
                 <div class="post">
-                <img src="https://tanzolymp.com/images/default-non-user-no-photo-1.jpg" alt="" class="profile-image">
+                <img src="<%= item.pfp%>" alt="" class="profile-image">
                 <h1 class="post-name"> <%= item.heading %> </h1>
-                <img src="<%= item.photo %>" class="post-photo" alt="">
+                <img src="<%= item.profile_picture %>" class="post-photo" alt="">
                 <hr>
                 <p class="post-desc"> <%= item.description %> </p>
                 </div>
             <% }) %>
         </div>
-            <button class="logged-in"><%= name %></button>
+        <div class="dropdown">
+            <button class="dropbtn"><img class="pfp" src="<%= pfp %>" alt=""><%= name %></button>
+            <div class="dropdown-content">
+              <a href="/profile">Profile Options</a>
+              <a href="#">Log out</a>
+            </div>
+          </div>
             <button onclick="location.href='/newpost'" class="new-post">Create a Post</button>
             <form action="/logout?_method=DELETE" method="POST">
             <button type="Submit">Logout</button>

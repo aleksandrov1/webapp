@@ -1,14 +1,16 @@
-* {    
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
-
 body {
     display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: rgb(92, 90, 90);
+    background: #0052D4;
+    background: -webkit-linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);
+    background: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);     margin:0 auto;
 }
+.title {
+    position: relative;
+    font-family: sans-serif;
+    color: #303245;
+}
+
 .break{
     height: 40px;
 }
@@ -16,10 +18,8 @@ body {
 .post-container {
     position:relative;
     width: 700px;
-    height: 400px;
-    background: #0052D4;
-    background: -webkit-linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);
-    background: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);     margin:0 auto;
+    height: 500px;
+    background-color: whitesmoke;
     text-align:center;
     border-radius: 15px;
 }
@@ -63,10 +63,17 @@ body {
 }
 
 .publish {
-    width: 150px;
-    height: 30px;
-    border-radius: 15px;
-    background-color: blue;
+    background-color: #08d;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    cursor: pointer;
+    font-size: 18px;
+    height: 50px;
+    outline: 0;
+    text-align: center;
+    width: 500px;;
 }
 
 #photo::placeholder {
@@ -75,6 +82,7 @@ body {
 
 #description::placeholder {
     font-size: 1.1rem;
+    font-family: sans-serif;
 }
 
 ::placeholder {
