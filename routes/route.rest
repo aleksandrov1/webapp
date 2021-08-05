@@ -1,0 +1,31 @@
+GET http://localhost:3000/users
+
+###
+
+GET http://localhost:3000/users/610c481104898f436d0e7641
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "id": "1",
+    "name": "Ppep",
+    "email": "121311",
+    "password": "1234",
+    "profile_photo": "21211",
+    "hasAward": false
+
+}
+
+###
+DELETE http://localhost:3000/users/610c4fb0ba15a745cf8df608
+
+###
+PATCH http://localhost:3000/users/610c539b3937b4481e3fd1a4
+Content-Type: application/json
+
+{
+    "name": "Cecko",
+    "email": "Ceckov"
+}

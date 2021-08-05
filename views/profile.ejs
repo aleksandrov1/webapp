@@ -9,12 +9,16 @@
 </head>
 <body>
     <div class="profile-container">
+        <button onclick="location.href='/'" class="home">Go Back</button>
         <h1>My Profile</h1>
     <img class="pfp" src="<%= pfp %>" alt="">
     <p>Profile ID : <%= id %></p>
-    <form action="/profile" method="POST">
+    <form action="/profile" method="POST" class="change-pfp">
         <input type="changePicture" id="changePicture" name="changePicture" type="changePicture" required placeholder="New Profile Picture URL">
         <button type="submit">Change Profile Picture</button>
+    </form>
+    <form action="/logout?_method=DELETE" method="POST">
+        <button class="logout" type="Submit">Logout</button>
     </form>
     </div>
 </body>

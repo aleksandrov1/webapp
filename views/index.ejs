@@ -5,11 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/all.css">
     <title>Startup App</title>
 </head>
 <body>
     <div class="main">
+        <div class="navbar">
+            <input type="text" class="search" placeholder="Search">
+
+            <button onclick="location.href='/newpost'" class="new-post">New Post</button>
+            <div class="dropdown">
+            <button class="dropbtn"><img class="pfp" src="<%= pfp %>" alt=""><%= name %></button>
+            <div class="dropdown-content">
+              <a href="/profile">Profile Options</a>
+              <a href="#">Log out</a>
+            </div>
+          </div></div>
         <div class="feed">
             <% currentPosts.forEach(function(item){ %>
                 <div class="post">
@@ -21,18 +31,13 @@
                 </div>
             <% }) %>
         </div>
-        <div class="dropdown">
-            <button class="dropbtn"><img class="pfp" src="<%= pfp %>" alt=""><%= name %></button>
-            <div class="dropdown-content">
-              <a href="/profile">Profile Options</a>
-              <a href="#">Log out</a>
-            </div>
-          </div>
-            <button onclick="location.href='/newpost'" class="new-post">Create a Post</button>
-            <form action="/logout?_method=DELETE" method="POST">
-            <button type="Submit">Logout</button>
         </div>
     </form>
+    </div>
+    <div class="profile-card">
+        <img src="" alt="">
+        <h1></h1>
+        <div class="award"></div>
     </div>
 </form>
 </body>

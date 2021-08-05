@@ -9,9 +9,27 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
+const mongoose = require('mongoose')
+const router = express.Router()
+const User = require('./models/user')
+
+
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+const db = mongoose.connection
+db.on('error', (error) => console.log(error))
+db.once('open', () => console.log('Connected to database'))
+
+app.use(express.json())
+
+const user_info = require('./routes/users')
+app.use('/users', user_info)
 
 
 const initializePassport = require('./passport-config')
+router.get('/:id', getUser, (req, res) => {
+    const email = res.json(res.user.email)
+    console.log(email)
+})
 initializePassport(
     passport,
     email => users.find(user => user.email === email),
@@ -67,16 +85,33 @@ app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
 }))
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
-    try {
+try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        users.push({
+        //users.push({
+            //id: Date.now().toString(),
+            //name: req.body.name,
+            //email: req.body.email,
+            //password: hashedPassword,
+            //profile_photo: 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg',
+            //hasAward: false
+        //})
+        const user = new User({
             id: Date.now().toString(),
             name: req.body.name,
             email: req.body.email,
             password: hashedPassword,
-            profile_photo: 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg'
+            profile_photo: 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg',
+            hasAward: false
         })
+        try {
+            const newUser = await user.save()
+        } catch (err) {
+            res.status(400).json({ message: err.message })
+        }
+    
+        
         res.redirect('/login')
+        console.log(users)
     } catch {
         res.redirect('/register')
     }
@@ -86,13 +121,17 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 app.post('/newpost', checkAuthenticated, (req, res) => {
     var resultObject = users.findIndex((obj => obj.name == req.user.name));
     var resultPicture = users[resultObject].profile_photo
+    var resultName = users[resultObject].name
+    var award = users[resultObject].hasAward
     try {
     posts.push({
         post_id: Date.now().toString(),
         heading: req.body.heading,
         description: req.body.description,
         photo: req.body.photo,
-        pfp: resultPicture
+        pfp: resultPicture,
+        name: resultName,
+        hasAward: award
     })
     } catch {
         res.redirect('/login')
@@ -135,5 +174,21 @@ function checkNotAuthenticated(req, res, next) {
     }
     next()
 }
+async function getUser(req, res, next) {
+    let user
+    try {
+        user = await User.findById(req.params.id)
+        if (user == null) {
+            return res.status(404).json({ message: 'Cannot find user' })    
+        }
+    } catch (err) {
+        return res.status(500).json({ message: err.message})
+    }
+
+    res.user = user
+    next()
+}
 
 app.listen(3000)
+
+module.exports = router
